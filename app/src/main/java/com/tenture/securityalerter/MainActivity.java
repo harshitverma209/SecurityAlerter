@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         safeNumber=getIntent().getStringExtra("number");
         lat=getIntent().getStringExtra("lat");
         lon=getIntent().getStringExtra("lon");
-
+        userid=getIntent().getStringExtra("userid");
         safe=findViewById(R.id.safe);
         inOut=findViewById(R.id.inOut);
         context=MainActivity.this;
