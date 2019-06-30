@@ -66,7 +66,6 @@ public class SmsRadarService extends Service {
         safeNumber=intent.getStringExtra("safeNumber");
         lat=intent.getStringExtra("lat");
         lon=intent.getStringExtra("lon");
-        userid=intent.getStringExtra("userid");
         Log.d("chech", lat);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
