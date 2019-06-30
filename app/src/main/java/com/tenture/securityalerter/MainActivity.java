@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         safeNumber=getIntent().getStringExtra("number");
         lat=getIntent().getStringExtra("lat");
         lon=getIntent().getStringExtra("lon");
-        userid=getIntent().getStringExtra("userid");
         safe=findViewById(R.id.safe);
         inOut=findViewById(R.id.inOut);
         context=MainActivity.this;
@@ -162,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
     private void start(Intent intent) {
 
         safe.setText("Listening from : "+safeNumber );
-        intent.putExtra("userid", userid);
         intent.putExtra("safeNumber", safeNumber);
         intent.putExtra("lat", lat);
         intent.putExtra("lon", lon);
