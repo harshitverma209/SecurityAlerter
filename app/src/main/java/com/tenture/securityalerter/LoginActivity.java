@@ -96,6 +96,7 @@ public class LoginActivity extends Activity {
                     Log.d("chech","Response received:"+response.toString());
                     JSONObject obj=new JSONObject(response);
                     Log.d("chech","object found");
+                    uid=obj.getString("uid");
                     userid=obj.getString("userid");
                     name=obj.getString("name");
                     lat=obj.getString("lat");
