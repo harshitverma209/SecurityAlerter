@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
         if (sharedPreferences.contains("number")) {
             number = sharedPreferences.getString("number", "+000000000000");
             userid=sharedPreferences.getString("userid", "nill");
-            if(sharedPreferences.contains("userid")){
+            if(sharedPreferences.contains("username")){
                 lat=sharedPreferences.getString("lat", "0");
                 lon=sharedPreferences.getString("lon", "0");
                 startWork();
