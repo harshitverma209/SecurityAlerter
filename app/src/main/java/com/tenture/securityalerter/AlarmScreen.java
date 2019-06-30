@@ -31,13 +31,16 @@ public class AlarmScreen extends Activity {
     View.OnClickListener alarmStop,inform;
     String lat,lon,username;
     RequestQueue queue;
-    String url;
+    String url,server;
     JsonObjectRequest jsObjRequest;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_screen);
+
+        server=
+
         sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
         username=sharedPreferences.getString("username", "nill");
         Log.d("chech", username);
