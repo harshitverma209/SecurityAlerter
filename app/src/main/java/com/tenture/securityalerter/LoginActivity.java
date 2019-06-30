@@ -119,6 +119,7 @@ public class LoginActivity extends Activity {
                     editor.putString("number", number);
                     editor.putString("lat", lat);
                     editor.putString("lon", lon);
+                    editor.putString("server", server);
                     editor.commit();
                     startWork();
                     finish();
