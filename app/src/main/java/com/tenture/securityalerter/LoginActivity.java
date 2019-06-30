@@ -40,10 +40,10 @@ public class LoginActivity extends Activity {
         server="policeconsole.000webhostapp.com/php/shops";
 
         sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
-        if (sharedPreferences.contains("number")) {
+        if (sharedPreferences.contains("username")) {
             number = sharedPreferences.getString("number", "+000000000000");
             userid=sharedPreferences.getString("userid", "nill");
-            if(sharedPreferences.contains("username")){
+            if(sharedPreferences.contains("lat")){
                 lat=sharedPreferences.getString("lat", "0");
                 lon=sharedPreferences.getString("lon", "0");
                 startWork();
