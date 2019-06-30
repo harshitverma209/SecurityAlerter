@@ -71,8 +71,8 @@ public class AlarmScreen extends Activity {
             public void onClick(View view) {
                 HashMap<String, String> params = new HashMap<String,String>();
                 params.put("username", username);
-                params.put("lat", getIntent().getStringExtra("lat")); // the entered data as the body.
-                params.put("lon", getIntent().getStringExtra("lon"));
+                params.put("lat", lat); // the entered data as the body.
+                params.put("lon", lon);
                 JSONObject jsonObject= new JSONObject(params);
 //                Log.d("chech",String.valueOf(loc.getLatitude()));
 //                        try {
