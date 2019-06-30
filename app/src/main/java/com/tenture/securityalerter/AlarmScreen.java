@@ -44,6 +44,8 @@ public class AlarmScreen extends Activity {
         sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
         username=sharedPreferences.getString("username", "nill");
         server=sharedPreferences.getString("server", "nill");
+        lat=sharedPreferences.getString("lat", "0");
+        lon=sharedPreferences.getString("lon", "0");
         Log.d("chech", username);
         alarmStopper=findViewById(R.id.alarmStopper);
         informer=findViewById(R.id.informer);
