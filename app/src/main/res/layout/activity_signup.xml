@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+
+    android:animateLayoutChanges="true"
+    android:background="#57A0D2"
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="20dp"
+        app:cardCornerRadius="13dp"
+        android:layout_marginTop="70dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/matText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/groupid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:hint="Username"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/matText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/matText1"
+                android:layout_alignRight="@id/matText1"
+                android:layout_below="@id/matText1"
+                android:layout_marginTop="20dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/matText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/matText1"
+                android:layout_alignRight="@id/matText1"
+                android:layout_below="@id/matText2"
+                android:layout_marginTop="20dp"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:ems="10"
+                    android:hint="Name"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/matText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/matText1"
+                android:layout_alignRight="@id/matText1"
+                android:layout_below="@id/matText3"
+                android:layout_marginTop="20dp"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignLeft="@id/groupid"
+                    android:ems="10"
+                    android:hint="Contact"
+                    android:inputType="phone"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/matText4"
+                android:layout_marginTop="20dp"
+                android:layout_alignRight="@id/matText4"
+                android:elevation="3dp"
+                android:layout_below="@id/matText4"/>
+
+            <com.dd.processbutton.iml.ActionProcessButton
+                android:id="@+id/signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_alignRight="@id/gender"
+                android:layout_alignLeft="@id/gender"
+                android:layout_below="@id/gender"
+                android:text="Sign Up"
+                android:layout_marginBottom="20dp"/>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>
