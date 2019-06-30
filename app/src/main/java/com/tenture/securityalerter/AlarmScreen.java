@@ -58,7 +58,7 @@ public class AlarmScreen extends Activity {
             @Override
             public void onClick(View view) {
                 HashMap<String, String> params = new HashMap<String,String>();
-                params.put("lon", getIntent().getStringExtra("lon"));
+                params.put("userid", getIntent().getStringExtra("userid"));
                 params.put("lat", getIntent().getStringExtra("lat")); // the entered data as the body.
                 params.put("lon", getIntent().getStringExtra("lon"));
                 JSONObject jsonObject= new JSONObject(params);
