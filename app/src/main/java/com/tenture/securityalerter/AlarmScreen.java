@@ -26,7 +26,7 @@ public class AlarmScreen extends Activity {
 
     Button alarmStopper, informer;
     View.OnClickListener alarmStop,inform;
-    String lat,lon,userid;
+    String lat,lon,username;
     RequestQueue queue;
     String url;
     JsonObjectRequest jsObjRequest;
@@ -36,7 +36,7 @@ public class AlarmScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_screen);
         sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
-        userid=sharedPreferences.getString("userid", "nill");
+        username=sharedPreferences.getString("username", "nill");
         Log.d("chech", userid);
         alarmStopper=findViewById(R.id.alarmStopper);
         informer=findViewById(R.id.informer);
