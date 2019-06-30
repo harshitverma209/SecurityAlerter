@@ -25,7 +25,7 @@ import de.adorsys.android.smsparser.SmsConfig;
 
 public class SmsRadarService extends Service {
     Context context;
-    static String safeNumber,lat,lon;
+    static String safeNumber,lat,lon,userid;
     Intent intent;
     @NonNull
     private LocalBroadcastManager localBroadcastManager;
@@ -66,7 +66,7 @@ public class SmsRadarService extends Service {
         safeNumber=intent.getStringExtra("safeNumber");
         lat=intent.getStringExtra("lat");
         lon=intent.getStringExtra("lon");
-        
+
         Log.d("chech", lat);
 
         Intent notificationIntent = new Intent(this, MainActivity.class);
