@@ -1,6 +1,7 @@
 package com.tenture.securityalerter;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,16 +26,17 @@ public class AlarmScreen extends Activity {
 
     Button alarmStopper, informer;
     View.OnClickListener alarmStop,inform;
-    String lat,lon,vid;
+    String lat,lon,userid;
     RequestQueue queue;
     String url;
     JsonObjectRequest jsObjRequest;
-
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_screen);
-
+        sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
+        userid=sharedPreferences.getString("userid", "nill");
         alarmStopper=findViewById(R.id.alarmStopper);
         informer=findViewById(R.id.informer);
 
