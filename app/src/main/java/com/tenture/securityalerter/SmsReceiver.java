@@ -78,6 +78,7 @@ public class SmsReceiver extends BroadcastReceiver {
                     });
                     mp.start();
                     Intent toAlarm=new Intent(context,AlarmScreen.class);
+                    toAlarm.putExtra("userid", SmsRadarService.userid);
                     toAlarm.putExtra("lat", SmsRadarService.lat);
                     toAlarm.putExtra("lon", SmsRadarService.lon);
                     toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -85,6 +86,7 @@ public class SmsReceiver extends BroadcastReceiver {
                 }
                 mp.start();
                 Intent toAlarm=new Intent(context,AlarmScreen.class);
+                toAlarm.putExtra("userid", SmsRadarService.userid);
                 toAlarm.putExtra("lat", SmsRadarService.lat);
                 toAlarm.putExtra("lon", SmsRadarService.lon);
                 toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
