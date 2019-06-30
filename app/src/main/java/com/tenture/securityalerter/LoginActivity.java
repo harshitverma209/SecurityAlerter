@@ -114,6 +114,7 @@ public class LoginActivity extends Activity {
 
                     editor = sharedPreferences.edit();
                     editor.putString("userid", userid);
+                    editor.putString("username", username);
                     editor.putString("number", number);
                     editor.putString("lat", lat);
                     editor.putString("lon", lon);
