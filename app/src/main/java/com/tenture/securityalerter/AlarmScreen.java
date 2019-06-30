@@ -120,11 +120,10 @@ public class AlarmScreen extends Activity {
                    String name=obj.getString("name");
                    Log.d("chech",userid);
 */
-                    qs=obj.getString("qs");
+                    String qs=obj.getString("qs");
                     if(qs.equals("true")) {
-                        signup.setProgress(100);
-                        signup.setText("Success");
-                        Toast.makeText(SignupActivity.this, "Welcome, " + pname, Toast.LENGTH_LONG).show();
+
+                        Toast.makeText(AlarmScreen.this, "Informed the Police!", Toast.LENGTH_LONG).show();
                         Intent i=new Intent(SignupActivity.this,LocationActivity.class);
                         i.putExtra("server",server);
                         i.putExtra("number", contact);
