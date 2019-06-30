@@ -27,7 +27,7 @@ public class LoginActivity extends Activity {
 
     Button login,signup;
     EditText usernameBox,passwordBox;
-    String uid,username,password,server,userid,name, qs,number="+000000000000";
+    String username,password,server,userid,name, qs,number="+000000000000";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private String lat,lon;
