@@ -27,7 +27,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 public class MainActivity extends AppCompatActivity {
     androidx.appcompat.widget.Toolbar toolbar;
     Context context;
-    String safeNumber="+000000000000",lat,lon;
+    String safeNumber="+000000000000",lat,lon,userid;
     TextView safe;
     Button inOut;
     Intent intent;
