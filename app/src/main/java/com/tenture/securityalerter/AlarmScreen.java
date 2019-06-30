@@ -104,7 +104,7 @@ public class AlarmScreen extends Activity {
             }
         };
     }
-    public void userSignup(){
+    public void addVic(){
         String url="http://"+server+"/AddVic.php?username="+username+"&lat="+lat+"&lon="+lon;
         //String url="http://192.168.1.6/polcon_server/shops/Signup.php?username="+uname+"&password="+pass+"&name="+pname+"&phone="+contact+"&gender="+gen;
 
@@ -124,12 +124,6 @@ public class AlarmScreen extends Activity {
                     if(qs.equals("true")) {
 
                         Toast.makeText(AlarmScreen.this, "Informed the Police!", Toast.LENGTH_LONG).show();
-                        Intent i=new Intent(SignupActivity.this,LocationActivity.class);
-                        i.putExtra("server",server);
-                        i.putExtra("number", contact);
-                        i.putExtra("userid",obj.getString("userid"));
-                        finish();
-                        startActivity(i);
 
                     }else{
                         Toast.makeText(AlarmScreen.this, "Police already informed!", Toast.LENGTH_LONG).show();
