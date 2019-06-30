@@ -105,7 +105,7 @@ public class AlarmScreen extends Activity {
         };
     }
     public void userSignup(){
-        String url="http://"+server+"/Signup.php?username="+uname+"&password="+pass+"&name="+pname+"&phone="+contact+"&gender="+gen;
+        String url="http://"+server+"/AddVic.php?username="+uname+"&password="+pass+"&name="+pname+"&phone="+contact+"&gender="+gen;
         //String url="http://192.168.1.6/polcon_server/shops/Signup.php?username="+uname+"&password="+pass+"&name="+pname+"&phone="+contact+"&gender="+gen;
 
         StringRequest req=new StringRequest(Request.Method.POST,url,new Response.Listener<String>(){
