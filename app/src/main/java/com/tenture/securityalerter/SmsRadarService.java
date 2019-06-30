@@ -25,7 +25,7 @@ import de.adorsys.android.smsparser.SmsConfig;
 
 public class SmsRadarService extends Service {
     Context context;
-    static String safeNumber,lat,lon,userid;
+    static String safeNumber,lat,lon;
     Intent intent;
     @NonNull
     private LocalBroadcastManager localBroadcastManager;
