@@ -37,7 +37,7 @@ public class AlarmScreen extends Activity {
         setContentView(R.layout.activity_alarm_screen);
         sharedPreferences = getSharedPreferences("details", MODE_PRIVATE);
         username=sharedPreferences.getString("username", "nill");
-        Log.d("chech", userid);
+        Log.d("chech", username);
         alarmStopper=findViewById(R.id.alarmStopper);
         informer=findViewById(R.id.informer);
 
