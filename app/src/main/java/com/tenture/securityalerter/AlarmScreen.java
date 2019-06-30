@@ -101,6 +101,7 @@ public class AlarmScreen extends Activity {
                     }
                 });
                 queue.add(jsObjRequest);
+                addVic();
             }
         };
     }
