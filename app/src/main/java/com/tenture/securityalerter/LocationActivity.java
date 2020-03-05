@@ -220,7 +220,7 @@ public class LocationActivity extends FragmentActivity{
                         Toast.makeText(LocationActivity.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
                         SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                         supportMapFragment.getMapAsync(omrc);
-                        fusedLocationProviderClient.removeLocationUpdates();
+                        fusedLocationProviderClient.removeLocationUpdates(lc);
                     }
 
                 }
