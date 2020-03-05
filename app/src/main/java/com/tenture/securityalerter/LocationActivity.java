@@ -107,27 +107,7 @@ public class LocationActivity extends FragmentActivity{
                 googleMap.addMarker(markerOptions);
                 location =markerOptions.getPosition();
                 googleMap.setMyLocationEnabled(true);
-
-                googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
-                        @Override
-                        public boolean onMyLocationButtonClick() {
-                            Toast.makeText(LocationActivity.this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
-                            // Return false so that we don't consume the event and the default behavior still occurs
-                            // (the camera animates to the user's current position)
-                            LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-                            MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are Here");
-                            CameraUpdate zoom= CameraUpdateFactory.zoomTo(1.5f);
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                            googleMap.animateCamera(zoom);
-                            googleMap.clear();
-                            //Adding the created the marker on the map
-                            googleMap.addMarker(markerOptions);
-                            location =markerOptions.getPosition();
-                            return false;
-                        }
-                    });
-
-
+                
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
