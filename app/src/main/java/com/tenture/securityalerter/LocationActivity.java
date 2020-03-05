@@ -20,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -55,11 +58,18 @@ public class LocationActivity extends FragmentActivity{
     Button locSelector;
     private LatLng location;
     String server,userid,qs="false";
+    private LocationRequest lq;
+    private LocationCallback lc;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         server=getIntent().getStringExtra("server");
+        lq=new LocationRequest()
+                .setInterval(100)
+                .setFastestInterval(10);
+        lc=new LocationCallback().onLocationResult(new LocationResult());
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
@@ -191,7 +201,8 @@ public class LocationActivity extends FragmentActivity{
 
 
     private void fetchLastLocation(){
-        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
+//        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        fusedLocationProviderClient.requestLocationUpdates(lq,lc,null);
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
