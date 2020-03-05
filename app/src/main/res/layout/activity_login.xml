@@ -30,9 +30,10 @@
 
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginHorizontal="10dp"
-
-                android:layout_marginVertical="15dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginVertical="20dp"
                 android:background="#FFFFFF"
 
                 >
@@ -54,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/til1"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="25dp"
                 android:background="#FFFFFF">

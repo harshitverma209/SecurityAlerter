@@ -5,16 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -27,10 +23,17 @@ public class LoginActivity extends Activity {
 
     Button login,signup;
     EditText usernameBox,passwordBox;
-    String username,password,server,userid,name, qs,number="+000000000000";
+    String username;
+    String password;
+    String server;
+    String userid;
+    String name;
+    boolean qs;
+    String number="+000000000000";
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private String lat,lon;
+    private boolean locationSet;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,21 +69,15 @@ public class LoginActivity extends Activity {
 
 
 
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    username = usernameBox.getText().toString();
-                    password = passwordBox.getText().toString();
-                    userLogin();
-                }
+            login.setOnClickListener(view -> {
+                username = usernameBox.getText().toString();
+                password = passwordBox.getText().toString();
+                userLogin();
             });
-            signup.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(LoginActivity.this, SignupActivity.class);
-                    i.putExtra("server", server);
-                    startActivity(i);
-                }
+            signup.setOnClickListener(view -> {
+                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                i.putExtra("server", server);
+                startActivity(i);
             });
         }
     }
@@ -88,55 +85,58 @@ public class LoginActivity extends Activity {
     public void userLogin(){
         String url="http://"+server+"/Login.php?username="+username+"&password="+password;
 
-        StringRequest req=new StringRequest(Request.Method.POST,url,new Response.Listener<String>(){
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.d("chech","Response received:"+response.toString());
-                    JSONObject obj=new JSONObject(response);
-                    Log.d("chech","object found");
-                    username=obj.getString("uid");
-                    userid=obj.getString("userid");
-                    name=obj.getString("name");
-                    lat=obj.getString("lat");
-                    lon=obj.getString("lon");
-                    number=("+91" + obj.getString("number")).replaceAll(" ", "");
-                    Log.d("chech",userid);
-                    qs=obj.getString("qs");
-                    //Toast.makeText(MainActivity.this,"Welcome, "+name,Toast.LENGTH_LONG).show();
-
-                } catch (JSONException e) {
-                    Log.d("chech","string not found");
-                    e.printStackTrace();
+        StringRequest req=new StringRequest(Request.Method.POST,url, response -> {
+            try {
+                Log.d("chech","Response received:"+ response);
+                JSONObject obj=new JSONObject(response);
+                Log.d("chech","object found");
+                username=obj.getString("uid");
+                userid=obj.getString("userid");
+                name=obj.getString("name");
+                locationSet=obj.getBoolean("locationSet");
+                if(locationSet) {
+                    lat = obj.getString("lat");
+                    lon = obj.getString("lon");
                 }
-                if(qs.equals("true")){
 
+                number=("+91" + obj.getString("number")).replaceAll(" ", "");
+                Log.d("chech",userid);
+                qs=obj.getBoolean("qs");
+                //Toast.makeText(MainActivity.this,"Welcome, "+name,Toast.LENGTH_LONG).show();
 
-                    editor = sharedPreferences.edit();
-                    editor.putString("userid", userid);
-                    editor.putString("username", username);
-                    editor.putString("number", number);
+            } catch (JSONException e) {
+                Log.d("chech","string not found");
+                e.printStackTrace();
+            }
+            if(qs){
+                editor = sharedPreferences.edit();
+                editor.putString("userid", userid);
+                editor.putString("username", username);
+                editor.putString("number", number);
+
+                editor.putString("server", server);
+                if(locationSet){
                     editor.putString("lat", lat);
                     editor.putString("lon", lon);
-                    editor.putString("server", server);
-                    editor.commit();
-                    startWork();
-                    finish();
-
-                }else{
-                    Toast.makeText(LoginActivity.this,"Error, Please try again ",Toast.LENGTH_LONG).show();
-                    //log.setText("Try Again");
-                    //log.setProgress(-1);
                 }
-            }
-        },new Response.ErrorListener(){
+                editor.apply();
+                if(locationSet){
+                    startWork();
+                }else{
+                    Intent intent = new Intent(LoginActivity.this,LocationActivity.class);
+                    intent.putExtra("userid",userid);
+                    intent.putExtra("server", server);
+                    Toast.makeText(LoginActivity.this, "Location not set!", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
+                }
+                finish();
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("chech",error.toString());
+            }else{
+                Toast.makeText(LoginActivity.this,"Error, Please try again ",Toast.LENGTH_LONG).show();
+                //log.setText("Try Again");
+                //log.setProgress(-1);
             }
-        });
+        }, error -> Log.d("chech",error.toString()));
         RequestQueue rq= Volley.newRequestQueue(LoginActivity.this);
         rq.add(req);
         req.setRetryPolicy(new DefaultRetryPolicy(5000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));

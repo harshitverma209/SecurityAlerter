@@ -70,12 +70,8 @@ public class SmsReceiver extends BroadcastReceiver {
                     soundsOn();
 /////////////////////Put it right under me!
 
-                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                        public void onCompletion(MediaPlayer mp) {
-                            //code
-                            mp.release();
-                        }
-                    });
+                    //code
+                    mp.setOnCompletionListener(MediaPlayer::release);
                     mp.start();
                     Intent toAlarm=new Intent(context,AlarmScreen.class);
                     toAlarm.putExtra("lat", SmsRadarService.lat);
@@ -83,12 +79,12 @@ public class SmsReceiver extends BroadcastReceiver {
                     toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(toAlarm);
                 }
-                mp.start();
-                Intent toAlarm=new Intent(context,AlarmScreen.class);
-                toAlarm.putExtra("lat", SmsRadarService.lat);
-                toAlarm.putExtra("lon", SmsRadarService.lon);
-                toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(toAlarm);
+//                mp.start();
+//                Intent toAlarm=new Intent(context,AlarmScreen.class);
+//                toAlarm.putExtra("lat", SmsRadarService.lat);
+//                toAlarm.putExtra("lon", SmsRadarService.lon);
+//                toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                context.startActivity(toAlarm);
                 Log.d(TAG, "onReceive: " + strMessage);
                 //Toast.makeText(context, strMessage, Toast.LENGTH_LONG).show();
             }

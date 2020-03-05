@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 
 import de.adorsys.android.smsparser.SmsTool;
 
@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Intent intent;
     RelativeLayout layout;
     View.OnClickListener inListener,outListener;
+    String DE_ACT_STRING,ACT_STRING;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,8 +64,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+        DE_ACT_STRING=getResources().getString(R.string.de_act_sys);
+        ACT_STRING=getResources().getString(R.string.act_sys);
         //toolbar = new Toolbar(getApplicationContext());
-        toolbar=findViewById(R.id.toolbar);
+//        toolbar=findViewById(R.id.toolbar);
 //        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
 //            @Override
 //            public boolean onMenuItemClick(MenuItem item) {
@@ -77,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 //                return false;
 //            }
 //        });
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
        // ActionBar actionBar=getSupportActionBar();
         //actionBar
 
@@ -101,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         layout.setBackgroundColor(getResources().getColor(R.color.appBackground));
 
 //other shit
-        intent=new Intent(MainActivity.this,SmsRadarService.class);;
+        intent=new Intent(MainActivity.this,SmsRadarService.class);
         initializeListeners();
         safeNumber=getIntent().getStringExtra("number");
         lat=getIntent().getStringExtra("lat");
@@ -119,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         if(SmsRadarService.isRunning()){
             safe.setText("Listening from : "+safeNumber );
             inOut.setOnClickListener(inListener);
-            inOut.setText("I'm in the office");
+            inOut.setText(DE_ACT_STRING);
         }else{
             safe.setText("Currently idle");
             inOut.setOnClickListener(outListener);
@@ -132,24 +139,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void initializeListeners() {
-        inListener=new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Button button=(Button) view;
-                button.setText("I'm going out!");
-                stop(intent);
-                button.setOnClickListener(outListener);
+        inListener= view -> {
+            Button button=(Button) view;
+            button.setText(ACT_STRING);
+            stop(intent);
+            button.setOnClickListener(outListener);
 
-            }
         };
-        outListener=new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Button button=(Button) view;
-                button.setText("I'm in the office");
-                start(intent);
-                button.setOnClickListener(inListener);
-            }
+        outListener= view -> {
+            Button button=(Button) view;
+            button.setText(DE_ACT_STRING);
+            start(intent);
+            button.setOnClickListener(inListener);
         };
     }
 

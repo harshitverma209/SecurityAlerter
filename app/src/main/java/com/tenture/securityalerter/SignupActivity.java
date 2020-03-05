@@ -31,7 +31,7 @@ public class SignupActivity extends AppCompatActivity {
     String uname,pass,pname,contact,gen;
     MaterialSpinner gender;
     ActionProcessButton signup;
-    String genders[]={"Male","Female","Others"};
+    String[] genders = {"Male", "Female", "Others"};
     String server,qs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +45,16 @@ public class SignupActivity extends AppCompatActivity {
         signup=findViewById(R.id.signup);
         signup.setMode(ActionProcessButton.Mode.ENDLESS);
         server=getIntent().getStringExtra("server");
-        ArrayAdapter<String> a=new ArrayAdapter<String>(SignupActivity.this,android.R.layout.simple_list_item_1,genders);
+        ArrayAdapter<String> a= new ArrayAdapter<>(SignupActivity.this, android.R.layout.simple_list_item_1, genders);
         gender.setAdapter(a);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signup.setProgress(1);
-                uname=username.getText().toString();
-                pass=password.getText().toString();
-                pname=name.getText().toString();
-                contact=number.getText().toString().replaceAll(" ", "");
-                gen=genders[gender.getSelectedIndex()];
-                userSignup();
-            }
+        signup.setOnClickListener(view -> {
+            signup.setProgress(1);
+            uname=username.getText().toString();
+            pass=password.getText().toString();
+            pname=name.getText().toString();
+            contact=number.getText().toString().replaceAll(" ", "");
+            gen=genders[gender.getSelectedIndex()];
+            userSignup();
         });
     }
     public void userSignup(){
@@ -69,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Log.d("chech","Response received:"+response.toString());
+                    Log.d("chech","Response received:"+ response);
                     JSONObject obj=new JSONObject(response);
                     Log.d("chech","object found");
                    /*String userid=obj.getString("userid");
@@ -98,13 +95,7 @@ public class SignupActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        },new Response.ErrorListener(){
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("chech",error.toString());
-            }
-        });
+        }, error -> Log.d("chech",error.toString()));
         RequestQueue rq= Volley.newRequestQueue(SignupActivity.this);
         rq.add(req);
         req.setRetryPolicy(new DefaultRetryPolicy(5000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));

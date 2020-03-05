@@ -4,4 +4,6 @@
     <string name="mapbox_access_token">pk.eyJ1IjoiaGFyc2hpdHZlcm1hMjA5IiwiYSI6ImNqdWI3ZmU5dzAwYWU0NXQ3bzY4b3hmcXUifQ.-9JFANmvHrqHY8qCs2w0AQ</string>
     <string name="action_settings">Settings</string>
     <string name="action_favorite">fav</string>
+    <string name="de_act_sys">Deactivate System</string>
+    <string name="act_sys">Activate System</string>
 </resources>
