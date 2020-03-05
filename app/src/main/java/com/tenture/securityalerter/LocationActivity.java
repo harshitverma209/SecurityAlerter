@@ -67,16 +67,7 @@ public class LocationActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         server=getIntent().getStringExtra("server");
-        lq=new LocationRequest()
-                .setInterval(1000)
-                .setPriority()
-                .setFastestInterval(100);
-        = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Toast.makeText(LocationActivity.this, location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
-            }
-        };
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -210,21 +201,33 @@ public class LocationActivity extends FragmentActivity{
 
     private void fetchLastLocation(){
 //        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        fusedLocationProviderClient.requestLocationUpdates(lq,,null);
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+        lq=new LocationRequest()
+                .setInterval(1000)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setFastestInterval(100);
+        lc=new LocationCallback(){
             @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    currentLocation = location;
-                    Toast.makeText(LocationActivity.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
-                    SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-                    supportMapFragment.getMapAsync(omrc);
-
-                }else{
+            public void onLocationResult(LocationResult locationResult) {
+                if(locationResult==null){
                     Toast.makeText(LocationActivity.this,"No Location recorded",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    for (Location location : locationResult.getLocations()) {
+                        // Update UI with location data
+                        // ...
+                        currentLocation = location;
+                        Toast.makeText(LocationActivity.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
+                        SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+                        supportMapFragment.getMapAsync(omrc);
+                        fusedLocationProviderClient.removeLocationUpdates();
+                    }
+
                 }
             }
-        });
+        };
+        fusedLocationProviderClient.requestLocationUpdates(lq,lc,null);
+
     }
     PermissionListener perLisInitializer(){
         PermissionListener permissionlistener = new PermissionListener() {
