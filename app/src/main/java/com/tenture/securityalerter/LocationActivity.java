@@ -113,8 +113,7 @@ public class LocationActivity extends FragmentActivity{
                         public boolean onMyLocationButtonClick() {
                             Toast.makeText(LocationActivity.this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
                             // Return false so that we don't consume the event and the default behavior still occurs
-                            // (the camera animates to the user's current position).
-                            fetchLastLocation();
+                            // (the camera animates to the user's current position)
                             LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
                             MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are Here");
                             CameraUpdate zoom= CameraUpdateFactory.zoomTo(1.5f);
@@ -221,6 +220,7 @@ public class LocationActivity extends FragmentActivity{
                     Toast.makeText(LocationActivity.this,currentLocation.getLatitude()+" "+currentLocation.getLongitude(),Toast.LENGTH_SHORT).show();
                     SupportMapFragment supportMapFragment= (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
                     supportMapFragment.getMapAsync(omrc);
+
                 }else{
                     Toast.makeText(LocationActivity.this,"No Location recorded",Toast.LENGTH_SHORT).show();
                 }
