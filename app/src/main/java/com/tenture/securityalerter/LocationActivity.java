@@ -60,7 +60,7 @@ public class LocationActivity extends FragmentActivity{
     private LatLng location;
     String server,userid,qs="false";
     private LocationRequest lq;
-    LocationListener locationListener;
+    private LocationCallback lc;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,9 +68,10 @@ public class LocationActivity extends FragmentActivity{
         setContentView(R.layout.activity_location);
         server=getIntent().getStringExtra("server");
         lq=new LocationRequest()
-                .setInterval(100)
-                .setFastestInterval(10);
-        locationListener= new LocationListener() {
+                .setInterval(1000)
+                .setPriority()
+                .setFastestInterval(100);
+        = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 Toast.makeText(LocationActivity.this, location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
@@ -209,7 +210,7 @@ public class LocationActivity extends FragmentActivity{
 
     private void fetchLastLocation(){
 //        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        fusedLocationProviderClient.requestLocationUpdates(lq,locationListener,null);
+        fusedLocationProviderClient.requestLocationUpdates(lq,,null);
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
