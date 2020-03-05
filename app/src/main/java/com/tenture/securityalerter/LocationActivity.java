@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -59,7 +60,7 @@ public class LocationActivity extends FragmentActivity{
     private LatLng location;
     String server,userid,qs="false";
     private LocationRequest lq;
-    private LocationCallback lc;
+    LocationListener locationListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,7 +70,13 @@ public class LocationActivity extends FragmentActivity{
         lq=new LocationRequest()
                 .setInterval(100)
                 .setFastestInterval(10);
-        lc=new LocationCallback().onLocationResult(LocationResult location[]);
+        locationListener= new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Toast.makeText(LocationActivity.this, location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
+            }
+        };
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
@@ -202,7 +209,7 @@ public class LocationActivity extends FragmentActivity{
 
     private void fetchLastLocation(){
 //        @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        fusedLocationProviderClient.requestLocationUpdates(lq,lc,null);
+        fusedLocationProviderClient.requestLocationUpdates(lq,locationListener,null);
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
             public void onSuccess(Location location) {
