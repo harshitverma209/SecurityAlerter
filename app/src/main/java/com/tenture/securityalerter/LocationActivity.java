@@ -69,7 +69,7 @@ public class LocationActivity extends FragmentActivity{
         lq=new LocationRequest()
                 .setInterval(100)
                 .setFastestInterval(10);
-        lc=new LocationCallback().onLocationResult(new LocationResult());
+        lc=new LocationCallback().onLocationResult(LocationResult location[]);
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
