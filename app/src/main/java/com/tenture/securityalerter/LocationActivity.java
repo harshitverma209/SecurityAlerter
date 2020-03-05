@@ -64,19 +64,7 @@ public class LocationActivity extends FragmentActivity{
 
 
         locSelector=findViewById(R.id.locSelector);
-        locSelector.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                userid=getIntent().getStringExtra("userid");
-                updateShopLocation();
-                Intent i=new Intent(LocationActivity.this,MainActivity.class);
-                i.putExtra("loc",location );
-                i.putExtra("server",getIntent().getStringExtra("server"));
-                i.putExtra("number", getIntent().getStringExtra("number"));
-                startActivity(i);
-            }
-        });
 
             TedPermission.with(LocationActivity.this)
                 .setPermissionListener(perLisInitializer())
@@ -90,12 +78,31 @@ public class LocationActivity extends FragmentActivity{
         omrc = new OnMapReadyCallback() {
             @SuppressLint("MissingPermission")
             public void onMapReady(final GoogleMap googleMap) {
+
+
+                locSelector.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        userid=getIntent().getStringExtra("userid");
+                        updateShopLocation();
+                        Intent i=new Intent(LocationActivity.this,MainActivity.class);
+                        i.putExtra("loc",location );
+                        i.putExtra("server",getIntent().getStringExtra("server"));
+                        i.putExtra("number", getIntent().getStringExtra("number"));
+                        startActivity(i);
+                    }
+                });
+
+
+
                 LatLng latLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
                 //MarkerOptions are used to create a new Marker.You can specify location, title etc with MarkerOptions
                 MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("You are Here");
                 CameraUpdate zoom= CameraUpdateFactory.zoomTo(12.5f);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                 googleMap.animateCamera(zoom);
+
                 //Adding the created the marker on the map
                 googleMap.addMarker(markerOptions);
                 location =markerOptions.getPosition();
