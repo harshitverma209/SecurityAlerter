@@ -107,7 +107,7 @@ public class LocationActivity extends FragmentActivity{
                 googleMap.addMarker(markerOptions);
                 location =markerOptions.getPosition();
                 googleMap.setMyLocationEnabled(true);
-                
+
 
                 googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
