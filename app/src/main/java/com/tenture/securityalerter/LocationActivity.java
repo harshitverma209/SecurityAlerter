@@ -179,7 +179,7 @@ public class LocationActivity extends FragmentActivity{
                     if(qs.equals("true")) {
                         //signup.setProgress(100);
                         //signup.setText("Success");
-                        Toast.makeText(LocationActivity.this, "Welcome, ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LocationActivity.this, "Welcome", Toast.LENGTH_LONG).show();
                         Intent i=new Intent(LocationActivity.this,LoginActivity.class);
                         i.putExtra("server",server);
                         //i.putExtra("number", contact);
