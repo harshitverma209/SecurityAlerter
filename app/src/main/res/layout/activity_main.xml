@@ -24,6 +24,7 @@
         android:layout_below="@id/safe"
         android:layout_marginLeft="10dp"
         android:paddingVertical="70dp"
+        android:paddingHorizontal="50dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorAccent"
         android:text="@string/act_sys" />
