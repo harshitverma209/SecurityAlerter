@@ -33,13 +33,19 @@
         android:background="@color/colorAccent"
         android:paddingVertical="70dp"
         android:text="@string/auto_protect" />
-    <TextView
-        android:id="@+id/safe"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/inOut"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:ems="20"
-        />
+        android:layout_marginTop="30dp">
+        <TextView
+            android:id="@+id/safe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:ems="20"
+            />
+    </com.google.android.material.card.MaterialCardView>
 </RelativeLayout>
