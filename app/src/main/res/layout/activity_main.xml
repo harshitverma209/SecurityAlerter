@@ -39,6 +39,9 @@
         android:layout_below="@id/inOut"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="30dp"
+        android:layout_alignLeft="@id/inOut"
+        android:layout_alignRight="@id/auto_serve"
+        android:layout_marginRight="10dp"
         android:foregroundGravity="center">
         <TextView
             android:id="@+id/safe"
