@@ -8,25 +8,23 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
+    <TextView
+        android:id="@+id/safe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:ems="20"
+        />
 
     <Button
         android:id="@+id/inOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_below="@id/safe"
         android:layout_marginLeft="10dp"
         android:paddingVertical="70dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorAccent"
-        android:text="@string/act_sys" >
-        <TextView
-            android:id="@+id/safe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:ems="20"
-            />
-    </Button>
+        android:text="@string/act_sys" />
 </RelativeLayout>
