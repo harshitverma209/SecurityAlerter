@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/inOut"
         android:layout_alignTop="@id/inOut"
-        android:layout_alignBaseline="@id/inOut"
+        android:layout_alignBottom="@id/inOut"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="10dp"
         android:background="@color/colorAccent"
