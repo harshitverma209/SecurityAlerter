@@ -6,4 +6,5 @@
     <string name="action_favorite">fav</string>
     <string name="de_act_sys">Deactivate\nSystem</string>
     <string name="act_sys">Activate\nSystem</string>
+    <string name="auto_protect">Auto Protect</string>
 </resources>
