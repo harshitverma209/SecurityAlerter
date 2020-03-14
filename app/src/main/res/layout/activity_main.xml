@@ -38,12 +38,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/inOut"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="30dp"
+        android:foregroundGravity="center">
         <TextView
             android:id="@+id/safe"
             android:text="Service Running"
+            android:textAlignment="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:ems="20"
             />
     </com.google.android.material.card.MaterialCardView>
