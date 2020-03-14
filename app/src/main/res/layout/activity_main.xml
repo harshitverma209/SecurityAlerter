@@ -8,20 +8,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/safe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="30dp"
-        android:ems="20"
-        />
+
 
     <Button
         android:id="@+id/inOut"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/safe"
+        android:layout_marginTop="40dp"
         android:layout_marginLeft="15dp"
         android:paddingVertical="70dp"
         android:layout_marginRight="10dp"
@@ -40,4 +33,12 @@
         android:background="@color/colorAccent"
         android:paddingVertical="70dp"
         android:text="@string/auto_protect" />
+    <TextView
+        android:id="@+id/safe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:ems="20"
+        />
 </RelativeLayout>
