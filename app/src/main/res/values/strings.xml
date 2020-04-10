@@ -7,5 +7,5 @@
     <string name="de_act_sys">Deactivate\nSystem</string>
     <string name="act_sys">Activate\nSystem</string>
     <string name="auto_protect">Auto Protect</string>
-    <string name="CHANNEL_ID">1337</string>
+    <string name="CHANNEL_ID">123</string>
 </resources>

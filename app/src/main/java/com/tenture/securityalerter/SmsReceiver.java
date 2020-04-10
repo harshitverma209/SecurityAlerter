@@ -25,6 +25,7 @@ public class SmsReceiver extends BroadcastReceiver {
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onReceive(Context context, Intent intent) {
+
         am = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
         if(intent.getStringExtra("safeNumber")!=null)
         {
@@ -73,18 +74,11 @@ public class SmsReceiver extends BroadcastReceiver {
                     //code
                     mp.setOnCompletionListener(MediaPlayer::release);
                     mp.start();
-                    Intent toAlarm=new Intent(context,AlarmScreen.class);
-                    toAlarm.putExtra("lat", SmsRadarService.lat);
-                    toAlarm.putExtra("lon", SmsRadarService.lon);
-                    toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(toAlarm);
+                    context.sendBroadcast(new Intent("Intruder"));
                 }
-//                mp.start();
-//                Intent toAlarm=new Intent(context,AlarmScreen.class);
-//                toAlarm.putExtra("lat", SmsRadarService.lat);
-//                toAlarm.putExtra("lon", SmsRadarService.lon);
-//                toAlarm.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(toAlarm);
+                mp.setOnCompletionListener(MediaPlayer::release);
+                mp.start();
+                context.sendBroadcast(new Intent("Intruder"));
                 Log.d(TAG, "onReceive: " + strMessage);
                 //Toast.makeText(context, strMessage, Toast.LENGTH_LONG).show();
             }

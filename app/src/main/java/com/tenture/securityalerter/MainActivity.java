@@ -2,10 +2,16 @@ package com.tenture.securityalerter;
 
 
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,7 +20,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 
 import de.adorsys.android.smsparser.SmsTool;
@@ -25,6 +34,7 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String NOTIFICATION_CHANNEL_ID = "com.tenture.securityAlerter";
     androidx.appcompat.widget.Toolbar toolbar;
     Context context;
     String safeNumber="+000000000000",lat,lon;
@@ -34,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout layout;
     View.OnClickListener inListener,outListener;
     String DE_ACT_STRING,ACT_STRING;
+    private String intruderChannelName;
+    private NotificationChannel intruderChannel;
+    private String channelName;
+    private NotificationChannel chan;
+    private NotificationManagerCompat notificationManager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,12 +75,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
 
         DE_ACT_STRING=getResources().getString(R.string.de_act_sys);
@@ -143,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
             Button button=(Button) view;
             button.setText(ACT_STRING);
             stop(intent);
+//            showNotification();
             button.setOnClickListener(outListener);
 
         };
@@ -150,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
             Button button=(Button) view;
             button.setText(DE_ACT_STRING);
             start(intent);
+//            showNotification();
             button.setOnClickListener(inListener);
         };
     }
@@ -167,5 +201,24 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("lon", lon);
         startService(intent);
     }
+//    private void showNotification() {
+//
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            CharSequence name = ("a");
+//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+//            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+//            notificationManager.createNotificationChannel(channel);
+//        }
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+//                .setSmallIcon(R.mipmap.ic_launcher)
+//                .setContentTitle("My notification")
+//                .setContentText("Hello World!")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//                // Set the intent that will fire when the user taps the notification
+////                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+//        notificationManager.notify(101, builder.build());
+//        Log.d("chech", "Showed notification");
+//    }
 
 }

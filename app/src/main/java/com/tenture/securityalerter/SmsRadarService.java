@@ -20,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import de.adorsys.android.smsparser.SmsConfig;
 
@@ -31,23 +32,35 @@ public class SmsRadarService extends Service {
     private LocalBroadcastManager localBroadcastManager;
     BroadcastReceiver SmsReceiver;
     private static boolean isRunning=false;
+    NotificationChannel chan;
+    NotificationManagerCompat notificationManager;
+    String NOTIFICATION_CHANNEL_ID = "com.tenture.securityAlerter";
+    NotificationChannel intruderChannel;
+    String channelName;
+    private String intruderChannelName;
+
 
     @Override
     public void onCreate() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            intruderChannelName="Intruder Channel";
+            intruderChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID+".intruderChan",intruderChannelName , NotificationManager.IMPORTANCE_HIGH);
+            channelName = "Background Service Teller";
+            chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager =  NotificationManagerCompat.from(this);
+            notificationManager.createNotificationChannel(chan);
+            notificationManager.createNotificationChannel(intruderChannel);
+        }
+
+
+
+
 
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void startMyOwnForeground(){
-        String NOTIFICATION_CHANNEL_ID = "com.tenture.securityAlerter";
-        String channelName = "My Background Service";
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-        chan.setLightColor(Color.BLUE);
-        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        assert manager != null;
-        manager.createNotificationChannel(chan);
+
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
         Notification notification = notificationBuilder.setOngoing(true)
@@ -94,6 +107,7 @@ public class SmsRadarService extends Service {
         SmsReceiver = new SmsReceiver();
         registerReceiver(SmsReceiver, filter);
 
+        registerReceiver(intruderBroadcastReceiver, new IntentFilter("Intruder"));
 
 
         Toast.makeText(getApplicationContext(), "Service started!", Toast.LENGTH_SHORT).show();
@@ -105,6 +119,13 @@ public class SmsRadarService extends Service {
         sendBroadcast(broadcastedIntent);
         return super.onStartCommand(intent, flags, startId);
     }
+    BroadcastReceiver intruderBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            //Intruder Alert Here!
+            showNotification();
+        }
+    };
 
     @Nullable
     @Override
@@ -116,30 +137,46 @@ public class SmsRadarService extends Service {
     @Override
     public void onDestroy() {
         unregisterReceiver(SmsReceiver);
+        unregisterReceiver(intruderBroadcastReceiver);
         isRunning = false;
         super.onDestroy();
     }
-    private void showNotification(Object... args) {
+    private void showNotification() {
+        Log.d("chech", "Showing Notification!");
         Intent intent1=new Intent(this,AlarmScreen.class);
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent1.putExtra("args", args);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent1, 0);
+//
+//        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+//                .setTicker("Intruder Alert!!")
+//                .setOngoing(true)
+//                .setSmallIcon(android.R.drawable.ic_menu_report_image)
+//                .setContentTitle("Intruder Alert")
+//                .setContentText("Your office is under attack!")
+////                .setContentIntent(pi)
+//                .setChannelId(intruderChannelName)
+//                .setPriority(NotificationCompat.PRIORITY_HIGH);
+////                .setAutoCancel(true)
+////                .build();
+////        notification.flags|= Notification.FLAG_NO_CLEAR;
+//
+//        assert notificationManager != null;
+//        notificationManager.notify(29345, builder.build());
 
-        Notification notification = new NotificationCompat.Builder(this,getString(R.string.CHANNEL_ID))
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                .setOngoing(true)
                 .setTicker("Intruder Alert!!")
-                .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("Intruder Alert")
                 .setContentText("Your office is under attack!")
                 .setContentIntent(pi)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                .setAutoCancel(true)
-                .build();
-        notification.flags|= Notification.FLAG_NO_CLEAR;
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        assert notificationManager != null;
-        notificationManager.notify(1, notification);
-
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+                // Set the intent that will fire when the user taps the notification
+//                .setContentIntent(pendingIntent)
+//                .setAutoCancel(true);
+        notificationManager.notify(101, builder.build());
+        Log.d("chech", "Showed notification");
     }
     public static boolean isRunning() {
         return isRunning;
