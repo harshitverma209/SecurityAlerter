@@ -58,7 +58,7 @@ public class AlarmScreen extends Activity {
         informer.setOnClickListener(inform);
     }
     private void initializeListeners(){
-        alarmStop= view -> SmsReceiver.mp.stop();
+        alarmStop= view -> SmsReceiver.stopAlarm();
         inform= view -> {
             HashMap<String, String> params = new HashMap<>();
             params.put("username", username);
