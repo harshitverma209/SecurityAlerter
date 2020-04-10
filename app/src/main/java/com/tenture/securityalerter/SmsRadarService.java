@@ -133,7 +133,7 @@ public class SmsRadarService extends Service {
                 .setContentIntent(pi)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
 //                .setAutoCancel(true)
-                .set
+                .
                 .build();
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
