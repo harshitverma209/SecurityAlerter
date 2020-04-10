@@ -101,26 +101,6 @@ public class SmsReceiver extends BroadcastReceiver {
         mp.stop();
     }
 
-    private void showNotification(Object... args) {
-        Intent intent1=new Intent(this,AlarmScreen.class);
-        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent1.putExtra("args", args);
-        PendingIntent pi = PendingIntent.getActivity(this, 0, intent1, 0);
-
-        Notification notification = new NotificationCompat.Builder(this,getString(R.string.CHANNEL_ID))
-                .setTicker("Help Needed!")
-                .setSmallIcon(android.R.drawable.ic_menu_report_image)
-                .setContentTitle("Please Help!")
-                .setContentText("Someone needs help near you!")
-                .setContentIntent(pi)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-//                .setAutoCancel(true)
-                .build();
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        assert notificationManager != null;
-        notificationManager.notify(1, notification);
-
-    }
+    
 
 }
