@@ -66,7 +66,7 @@ public class SmsRadarService extends Service {
         Notification notification = notificationBuilder.setOngoing(true)
                 //.setSmallIcon(R.drawable.icon)
                 .setContentTitle("App is running in background")
-                .setPriority(NotificationManager.IMPORTANCE_MIN)
+                .setPriority(NotificationManager.IMPORTANCE_DEFAULT)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .build();
         startForeground(1337, notification);
