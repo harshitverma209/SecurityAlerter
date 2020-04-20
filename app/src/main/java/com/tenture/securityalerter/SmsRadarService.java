@@ -86,7 +86,7 @@ public class SmsRadarService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
 
-        Notification notification = new NotificationCompat.Builder(this)
+        Notification notification = new NotificationCompat.Builder(this,channelName)
                 //.setSmallIcon(R.mipmap.app_icon)
                 .setContentTitle("My Awesome App")
                 .setContentText("Doing some work...")
